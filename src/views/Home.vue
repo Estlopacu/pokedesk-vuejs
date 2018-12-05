@@ -1,18 +1,28 @@
+import Home from './views/Home.vue';
+import Poke from './compomnents/Poke.vue';
+
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div class="wrapper">
+    <Poke></Poke>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import Poke from '@/components/Poke.vue';
 
 @Component({
   components: {
-    HelloWorld,
+    Poke,
   },
 })
 export default class Home extends Vue {}
 </script>
+
+<style lang="scss">
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
