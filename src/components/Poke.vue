@@ -1,9 +1,11 @@
 <template>
   <div class="poke">
-    <poke-image :imageurl="pokemon.sprites.front_default"></poke-image>
-    <poke-name :name="pokemon.name"></poke-name>
-    <poke-search v-on:get-fetch-data="fetchData"></poke-search>
-    <poke-description></poke-description>
+    <poke-image :images="pokemon.sprites"></poke-image>
+    <poke-name :pokemonName="pokemon.name"></poke-name>
+    <poke-search></poke-search>
+    <poke-type :type="pokemon.types"></poke-type>
+    <poke-spec :spec="pokemon"></poke-spec>
+    <poke-description :abilities="pokemon.abilities"></poke-description>
   </div>
 </template>
 
@@ -14,6 +16,8 @@ import PokeImage from './PokeImage.vue';
 import PokeName from './PokeName.vue';
 import PokeSearch from './PokeSearch.vue';
 import PokeDescription from './PokeDescription.vue';
+import PokeSpec from './PokeSpec.vue';
+import PokeType from './PokeType.vue';
 
 @Component({
   components: {
@@ -21,6 +25,8 @@ import PokeDescription from './PokeDescription.vue';
     PokeName,
     PokeSearch,
     PokeDescription,
+    PokeSpec,
+    PokeType,
   },
   created() {
     this.fetchData();
@@ -31,10 +37,8 @@ import PokeDescription from './PokeDescription.vue';
         const pokemon = await axios.get(
           `https://pokeapi.co/api/v2/pokemon/${name}/`,
         );
-        if (pokemon.data) {
-          this.pokemon = pokemon.data;
-        }
-        console.log(this.pokemon);
+        this.pokemon = pokemon.data;
+        console.log(pokemon.data);
       } catch (error) {
         console.log('error', error);
       }
@@ -42,11 +46,7 @@ import PokeDescription from './PokeDescription.vue';
   },
   data() {
     return {
-      pokemon: {
-        sprites: {
-          front_default: '',
-        },
-      },
+      pokemon: {},
     };
   },
 })
