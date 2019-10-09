@@ -1,11 +1,12 @@
 <template>
   <div class="poke-spec">
+    <h3>Complexion</h3>
     <p>
-      <strong>Weight</strong>
+      Weight
       {{spec.weight}}
     </p>
     <p>
-      <strong>Height</strong>
+      Height
       {{spec.height}}''
     </p>
   </div>

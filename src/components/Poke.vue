@@ -19,6 +19,13 @@ import PokeDescription from './PokeDescription.vue';
 import PokeSpec from './PokeSpec.vue';
 import PokeType from './PokeType.vue';
 
+declare module 'vue/types/vue' {
+  interface Vue {
+    pokemon: any;
+    fetchData: Function;
+  }
+}
+
 @Component({
   components: {
     PokeImage,
@@ -59,6 +66,6 @@ export default class Poke extends Vue {}
   border: 4px solid black;
   min-width: 300px;
   padding: 10px;
-  background-color: red;
+  background-color: gray;
 }
 </style>

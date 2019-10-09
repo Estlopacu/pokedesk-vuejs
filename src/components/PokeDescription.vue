@@ -1,16 +1,17 @@
 <template>
   <div class="poke-description">
-    <h4>Ability</h4>
+    <h3>Ability</h3>
     <ul>
       <li v-for="(ability,index) in abilities" :key="index">
-        <strong>{{ability.ability.name}}</strong>
+        {{ability.ability.name}}
       </li>
     </ul>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+
 @Component({
   props: ['abilities'],
 })

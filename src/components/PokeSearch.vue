@@ -1,9 +1,18 @@
 <template>
-  <input type="text" v-model="pokemonName">
+  <form v-on:submit.prevent="getPokemonName()">
+    <input type="text" class="pokemon-name" @blur="getPokemonName()" v-model="pokemonName">
+    <input type="submit" class="pokemon-name-button" value="Search">
+  </form>
 </template>
 
 <script lang="ts">
 import { Prop, Component, Vue } from 'vue-property-decorator';
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    pokemonName: string;
+  }
+}
 
 @Component({
   data() {
@@ -11,8 +20,8 @@ import { Prop, Component, Vue } from 'vue-property-decorator';
       pokemonName: '',
     };
   },
-  watch: {
-    pokemonName() {
+  methods: {
+    getPokemonName() {
       this.$parent.fetchData(this.pokemonName);
     },
   },
@@ -22,14 +31,22 @@ export default class PokeSearch extends Vue {}
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-input {
+.pokemon-name {
   width: 100%;
   text-align: center;
-  padding: 5px;
+  padding: 10px;
   box-sizing: border-box;
-  background-color: tomato;
-  border-top: none;
-  border-left: none;
+  background-color: lightgrey;
+  border: none;
+  border: 3px solid white;
   outline: none;
+  border-bottom: none;
+}
+.pokemon-name-button {
+  border: 3px solid white;
+  width: 100%;
+  padding: 10px;
+  font-weight: bold;
+  background-color: lightgrey;
 }
 </style>
