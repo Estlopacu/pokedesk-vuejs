@@ -1,8 +1,8 @@
 <template>
   <div class="poke">
-    <span v-if="isPending">Loading...</span>
+    <h3 v-if="isFetching">Loading...</h3>
     <span v-else-if="isError">
-      {{ error.response?.status === 404 ? "Pokémon not found!" : error.message }}
+      <h3>{{ error.response?.status === 404 ? "Pokémon not found!" : error.message }}</h3>
       <button class="pokemon-name-button" @click="() => fetchNewPokemon('pikachu')">
         New Search
       </button>
@@ -37,7 +37,7 @@ const fetchPokemon = async (name: string) => {
 };
 
 const {
-  isPending,
+  isFetching,
   isError,
   error,
   data: pokemon,
@@ -46,6 +46,7 @@ const {
   queryKey: ["pokemon", selectedName.value],
   queryFn: () => fetchPokemon(selectedName.value),
   enabled: true,
+  retry: false,
 });
 
 const fetchNewPokemon = (name: string) => {
