@@ -3,22 +3,25 @@
     <h3>Complexion</h3>
     <p>
       Weight
-      {{spec.weight}}
+      {{ spec.weight }}
     </p>
     <p>
       Height
-      {{spec.height}}''
+      {{ spec.height }}''
     </p>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-
-@Component({
-  props: ['spec'],
-})
-export default class PokeSpec extends Vue {}
+export default {
+  name: "PokeSpec",
+  props: {
+    spec: {
+      type: Object,
+      required: true,
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

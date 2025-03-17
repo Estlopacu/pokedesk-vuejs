@@ -2,20 +2,23 @@
   <div class="poke-description">
     <h3>Ability</h3>
     <ul>
-      <li v-for="(ability,index) in abilities" :key="index">
-        {{ability.ability.name}}
+      <li v-for="(ability, index) in abilities" :key="index">
+        {{ ability.ability.name }}
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-
-@Component({
-  props: ['abilities'],
-})
-export default class PokeDescription extends Vue {}
+export default {
+  name: "PokeDescription",
+  props: {
+    abilities: {
+      type: Array,
+      required: true,
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">

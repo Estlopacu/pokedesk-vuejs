@@ -1,30 +1,26 @@
 <template>
-  <img :src="getImageUrl">
+  <img :src="getImageUrl" />
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { defineComponent } from "vue";
 
-declare module 'vue/types/vue' {
-  interface Vue {
-    images: Array<any>;
-  }
-}
-
-@Component({
-  props: ['images'],
-  data() {
-    return { pokemonImage: '' };
+export default defineComponent({
+  name: "PokeImage",
+  props: {
+    images: {
+      type: Object,
+      required: true,
+    },
   },
   computed: {
     getImageUrl() {
-      const randomImage: any = ['front_default', 'front_shiny'];
+      const randomImage: any = ["front_default", "front_shiny"];
       const index: any = Math.floor(Math.random() * 2 + 0);
       return this.images && this.images[randomImage[index]];
     },
   },
-})
-export default class PokeImage extends Vue {}
+});
 </script>
 
 <style scoped lang="scss">

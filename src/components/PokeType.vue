@@ -1,16 +1,19 @@
 <template>
   <div class="poke-type">
     <h3>Type</h3>
-    <p>{{type && type[0].type.name}}</p>
+    <p>{{ type && type[0].type.name }}</p>
   </div>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-
-@Component({
-  props: ['type'],
-})
-export default class PokeType extends Vue {}
+export default {
+  name: "PokeType",
+  props: {
+    type: {
+      type: Array,
+      required: true,
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

@@ -1,32 +1,25 @@
 <template>
   <div class="poke">
-    <poke-image :images="pokemon.sprites"></poke-image>
-    <poke-name :pokemonName="pokemon.name"></poke-name>
-    <poke-search></poke-search>
-    <poke-type :type="pokemon.types"></poke-type>
-    <poke-spec :spec="pokemon"></poke-spec>
-    <poke-description :abilities="pokemon.abilities"></poke-description>
+    <poke-image :images="pokemon.sprites" />
+    <poke-name :pokemonName="pokemon.name" />
+    <poke-search @get-pokemon-name="fetchData" />
+    <poke-type :type="pokemon.types" />
+    <poke-spec :spec="pokemon" />
+    <poke-description :abilities="pokemon.abilities" />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import axios from 'axios';
-import PokeImage from './PokeImage.vue';
-import PokeName from './PokeName.vue';
-import PokeSearch from './PokeSearch.vue';
-import PokeDescription from './PokeDescription.vue';
-import PokeSpec from './PokeSpec.vue';
-import PokeType from './PokeType.vue';
+import axios from "axios";
+import PokeImage from "./PokeImage.vue";
+import PokeName from "./PokeName.vue";
+import PokeSearch from "./PokeSearch.vue";
+import PokeDescription from "./PokeDescription.vue";
+import PokeSpec from "./PokeSpec.vue";
+import PokeType from "./PokeType.vue";
 
-declare module 'vue/types/vue' {
-  interface Vue {
-    pokemon: any;
-    fetchData: Function;
-  }
-}
-
-@Component({
+export default {
+  name: "Poke",
   components: {
     PokeImage,
     PokeName,
@@ -39,25 +32,24 @@ declare module 'vue/types/vue' {
     this.fetchData();
   },
   methods: {
-    async fetchData(name = 'pikachu') {
+    async fetchData(name = "pikachu") {
       try {
-        const pokemon = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/${name}/`,
-        );
+        const pokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}/`);
         this.pokemon = pokemon.data;
-        console.log(pokemon.data);
       } catch (error) {
-        console.log('error', error);
+        alert(error);
       }
     },
   },
   data() {
     return {
-      pokemon: {},
+      pokemon: {
+        sprites: {},
+        name: "",
+      },
     };
   },
-})
-export default class Poke extends Vue {}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
