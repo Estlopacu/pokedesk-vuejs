@@ -1,15 +1,24 @@
 <template>
   <div class="poke">
-    <poke-image :images="pokemon.sprites" />
-    <poke-name :pokemonName="pokemon.name" />
-    <poke-search @get-pokemon-name="fetchData" />
-    <poke-type :type="pokemon.types" />
-    <poke-spec :spec="pokemon" />
-    <poke-description :abilities="pokemon.abilities" />
+    <span v-if="isPending">Loading...</span>
+    <span v-else-if="isError">
+      {{ error.response?.status === 404 ? "Pokémon not found!" : error.message }}
+      <button class="pokemon-name-button" @click="() => fetchNewPokemon('pikachu')">
+        New Search
+      </button>
+    </span>
+    <div v-else>
+      <poke-image :images="pokemon.sprites" />
+      <poke-name :pokemonName="pokemon.name" />
+      <poke-search @get-pokemon-name="fetchNewPokemon" />
+      <poke-type :type="pokemon.types" />
+      <poke-spec :spec="pokemon" />
+      <poke-description :abilities="pokemon.abilities" />
+    </div>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import axios from "axios";
 import PokeImage from "./PokeImage.vue";
 import PokeName from "./PokeName.vue";
@@ -17,47 +26,46 @@ import PokeSearch from "./PokeSearch.vue";
 import PokeDescription from "./PokeDescription.vue";
 import PokeSpec from "./PokeSpec.vue";
 import PokeType from "./PokeType.vue";
+import { useQuery } from "@tanstack/vue-query";
+import { ref } from "vue";
 
-export default {
-  name: "Poke",
-  components: {
-    PokeImage,
-    PokeName,
-    PokeSearch,
-    PokeDescription,
-    PokeSpec,
-    PokeType,
-  },
-  created() {
-    this.fetchData();
-  },
-  methods: {
-    async fetchData(name = "pikachu") {
-      try {
-        const pokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}/`);
-        this.pokemon = pokemon.data;
-      } catch (error) {
-        alert(error);
-      }
-    },
-  },
-  data() {
-    return {
-      pokemon: {
-        sprites: {},
-        name: "",
-      },
-    };
-  },
+const selectedName = ref("pikachu");
+
+const fetchPokemon = async (name: string) => {
+  const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+  return data;
+};
+
+const {
+  isPending,
+  isError,
+  error,
+  data: pokemon,
+  refetch,
+} = useQuery({
+  queryKey: ["pokemon", selectedName.value],
+  queryFn: () => fetchPokemon(selectedName.value),
+  enabled: true,
+});
+
+const fetchNewPokemon = (name: string) => {
+  selectedName.value = name;
+  refetch();
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .poke {
   border: 4px solid black;
   min-width: 300px;
   padding: 10px;
   background-color: gray;
+}
+.pokemon-name-button {
+  border: 3px solid white;
+  width: 100%;
+  padding: 10px;
+  font-weight: bold;
+  background-color: lightgrey;
 }
 </style>
