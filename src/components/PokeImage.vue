@@ -2,24 +2,20 @@
   <img :src="getImageUrl" />
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { computed, PropType } from "vue";
 
-export default defineComponent({
-  name: "PokeImage",
-  props: {
-    images: {
-      type: Object,
-      required: true,
-    },
+const props = defineProps({
+  images: {
+    type: Object as PropType<{ [key: string]: string }>,
+    required: true,
   },
-  computed: {
-    getImageUrl() {
-      const randomImage: any = ["front_default", "front_shiny"];
-      const index: any = Math.floor(Math.random() * 2 + 0);
-      return this.images && this.images[randomImage[index]];
-    },
-  },
+});
+
+const getImageUrl = computed(() => {
+  const randomImage: any = ["front_default", "front_shiny"];
+  const index: any = Math.floor(Math.random() * 2 + 0);
+  return props.images && props.images[randomImage[index]];
 });
 </script>
 

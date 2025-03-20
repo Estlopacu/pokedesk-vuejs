@@ -9,16 +9,10 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "PokeDescription",
-  props: {
-    abilities: {
-      type: Array,
-      required: true,
-    },
-  },
-};
+<script setup lang="ts">
+defineProps<{
+  abilities: Array<{ ability: { name: string } }>;
+}>();
 </script>
 
 <style scoped lang="scss">

@@ -1,26 +1,27 @@
 <template>
   <form v-on:submit.prevent="getPokemonName()">
-    <input type="text" class="pokemon-name" @blur="getPokemonName()" v-model="pokemonName" />
+    <input type="text" class="pokemon-name" v-model="localPokemonName" />
     <input type="submit" class="pokemon-name-button" value="Search" />
   </form>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { defineProps, defineEmits, ref } from "vue";
 
-export default defineComponent({
-  name: "PokeSearch",
-  data() {
-    return {
-      pokemonName: "",
-    };
-  },
-  methods: {
-    getPokemonName() {
-      this.$emit("get-pokemon-name", this.pokemonName);
-    },
+const props = defineProps({
+  modelValue: {
+    type: String,
+    required: true,
   },
 });
+
+const localPokemonName = ref(props.modelValue);
+
+const emit = defineEmits(["get-pokemon-name"]);
+
+const getPokemonName = () => {
+  emit("get-pokemon-name", localPokemonName.value);
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

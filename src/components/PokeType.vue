@@ -4,16 +4,16 @@
     <p>{{ type && type[0].type.name }}</p>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "PokeType",
-  props: {
-    type: {
-      type: Array,
-      required: true,
-    },
+
+<script setup lang="ts">
+import { defineProps } from "vue";
+
+defineProps({
+  type: {
+    type: Array<{ type: { name: string } }>,
+    required: true,
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

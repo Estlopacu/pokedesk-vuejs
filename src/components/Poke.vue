@@ -1,5 +1,5 @@
 <template>
-  <div class="poke">
+  <div class="poke rounded-xl">
     <h3 v-if="isFetching">Loading...</h3>
     <span v-else-if="isError">
       <h3>{{ error.response?.status === 404 ? "Pokémon not found!" : error.message }}</h3>
@@ -10,7 +10,7 @@
     <div v-else>
       <poke-image :images="pokemon.sprites" />
       <poke-name :pokemonName="pokemon.name" />
-      <poke-search @get-pokemon-name="fetchNewPokemon" />
+      <poke-search v-model="modelValue" @get-pokemon-name="fetchNewPokemon" />
       <poke-type :type="pokemon.types" />
       <poke-spec :spec="pokemon" />
       <poke-description :abilities="pokemon.abilities" />
