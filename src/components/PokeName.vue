@@ -1,5 +1,5 @@
 <template>
-  <h3>{{ pokemonName && pokemonName.toUpperCase() }}</h3>
+  <h3 class="my-2 font-bold">{{ pokemonName && pokemonName.toUpperCase() }}</h3>
 </template>
 
 <script setup lang="ts">
