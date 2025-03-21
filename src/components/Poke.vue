@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import axios from "axios";
 import PokeImage from "./PokeImage.vue";
 import PokeName from "./PokeName.vue";
 import PokeSearch from "./PokeSearch.vue";
@@ -32,8 +31,8 @@ import { ref } from "vue";
 const selectedName = ref("pikachu");
 
 const fetchPokemon = async (name: string) => {
-  const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-  return data;
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+  return response.json();
 };
 
 const {
