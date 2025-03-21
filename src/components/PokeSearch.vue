@@ -1,5 +1,5 @@
 <template>
-  <form v-on:submit.prevent="getPokemonName()">
+  <form v-on:submit.prevent="getPokemonName()" class="relative">
     <input
       type="text"
       class="pokemon-name"
@@ -7,8 +7,12 @@
       @focus="handleFocus"
       @blur="handleBlur"
     />
-    <ul class="absolute w-68 bg-amber-200" v-if="showAutoComplete" @mousedown.prevent>
-      <li v-for="pokemon in items" @click="setPokemonValueFromDropdown(pokemon.name)">
+    <ul class="absolute mt-1 w-full bg-[lightgrey]" v-if="showAutoComplete" @mousedown.prevent>
+      <li
+        v-for="pokemon in items"
+        @click="setPokemonValueFromDropdown(pokemon.name)"
+        class="py-3 border-x-2 border-b-2 border-white"
+      >
         {{ pokemon.name }}
       </li>
     </ul>
