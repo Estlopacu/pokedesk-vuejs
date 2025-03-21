@@ -1,5 +1,10 @@
 <template>
-  <div class="wrapper my-2"><img class="animate-bounce-once" :src="getImageUrl" /></div>
+  <div class="flex justify-center items-center my-2">
+    <img
+      class="animate-bounce-once border-4 border-[#D98324] rounded-full w-[160px]"
+      :src="getImageUrl"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -20,13 +25,6 @@ const getImageUrl = computed(() => {
 </script>
 
 <style scoped lang="scss">
-img {
-  width: 140px;
-  background: white;
-  border-radius: 50%;
-  border: 3px solid;
-}
-
 @keyframes bounce-once {
   0%,
   20%,

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="flex justify-center items-center">
     <Poke />
   </div>
 </template>
@@ -13,11 +13,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-</style>

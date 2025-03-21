@@ -2,21 +2,25 @@
   <form v-on:submit.prevent="getPokemonName()" class="relative">
     <input
       type="text"
-      class="pokemon-name"
+      class="w-full text-center p-2.5 bg-[#EFDCAB] border-3 border-[#D98324] border-b-0 outline-none"
       v-model="localPokemonName"
       @focus="handleFocus"
       @blur="handleBlur"
     />
-    <ul class="absolute mt-1 w-full bg-[lightgrey]" v-if="showAutoComplete" @mousedown.prevent>
+    <ul class="absolute mt-1 w-full bg-[#EFDCAB]" v-if="showAutoComplete" @mousedown.prevent>
       <li
         v-for="pokemon in items"
         @click="setPokemonValueFromDropdown(pokemon.name)"
-        class="py-3 border-x-2 border-b-2 border-white"
+        class="py-3 border-x-2 border-b-2 border-[#D98324]"
       >
         {{ pokemon.name }}
       </li>
     </ul>
-    <input type="submit" class="pokemon-name-button" value="Search" />
+    <input
+      type="submit"
+      class="border-3 border-[#D98324] w-full p-2.5 font-bold bg-[#EFDCAB]"
+      value="Search"
+    />
   </form>
 </template>
 
@@ -68,24 +72,3 @@ onMounted(() => {
   getPokemons();
 });
 </script>
-
-<style scoped lang="scss">
-.pokemon-name {
-  width: 100%;
-  text-align: center;
-  padding: 10px;
-  box-sizing: border-box;
-  background-color: lightgrey;
-  border: none;
-  border: 3px solid white;
-  outline: none;
-  border-bottom: none;
-}
-.pokemon-name-button {
-  border: 3px solid white;
-  width: 100%;
-  padding: 10px;
-  font-weight: bold;
-  background-color: lightgrey;
-}
-</style>

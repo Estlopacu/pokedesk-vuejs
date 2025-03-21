@@ -1,5 +1,5 @@
 <template>
-  <div class="poke rounded-xl">
+  <div class="border-4 border-[#D98324] p-2.5 bg-white rounded-xl shadow-xl">
     <h3 v-if="isFetching">Loading...</h3>
     <span v-else-if="isError">
       <h3>{{ error.response?.status === 404 ? "Pokémon not found!" : error.message }}</h3>
