@@ -13,7 +13,7 @@ Welcome to the Pokedesk Vue.js project! This project is a simple web application
 
 ## Live Demo
 
-Check out the live demo of the project [here](https://clever-goldwasser-d1dacc.netlify.com/).
+Check out the live demo of the project [here]([https://clever-goldwasser-d1dacc.netlify.com/](https://clever-goldwasser-d1dacc.netlify.app/)).
 
 ## Getting Started
 
